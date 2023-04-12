@@ -1,16 +1,17 @@
 const mongoose = require('mongoose');
 
+mongoose.connect('mongodb://127.0.0.1/petShop');
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", () => {
+  console.log("Database connected");
+});
+
 // require model database
 const Pet = require('./models/pets');
 
-mongoose.connect('mongodb://localhost:27017/petShop', { useNewUrlParser: true })
-  .then(() => {
-    console.log("Mongo open!!!");
-  })
-  .catch(() => {
-    console.log("Mongo Connection error!!");
-    console.log(err);
-  })
+
 
 //  TO INSERT MULTIPLE PRODUCTS
 const seedPets = [

@@ -1,0 +1,12 @@
+<%- layout('layout/boilerplate')%>
+<div class="row">
+    <% for (let animal of animals) {%>
+      <li>
+        <a href="/<%= animal._id %>">
+            <%= animal.name %>
+        </a>
+      </li>
+    <% } %>
+
+    <!-- <a href="/new">Add New</a> -->
+  </div>

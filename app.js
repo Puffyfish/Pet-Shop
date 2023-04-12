@@ -40,6 +40,18 @@ app.get('/new', (req, res) => {
   res.render('pages/new')
 })
 
+app.get('/dogs', async (req, res) => {
+  const animals = await Pet.find({ category: 'Dog' });
+  console.log(animals);
+  res.render('pages/animals', {animals});
+})
+
+app.get('/cats', async (req, res) => {
+  const animals = await Pet.find({ category: 'Cat' });
+  console.log(animals);
+  res.render('pages/animals', {animals});
+})
+
 // show route for specific id
 app.get('/:id', async (req, res) => {
   const { id } = req.params;
@@ -67,6 +79,7 @@ app.put('/:id', async (req, res) => {
   const editedPet = await Pet.findByIdAndUpdate(id, req.body, {runValidators: true, new: true})
   res.redirect(`/${editedPet._id}`);
 })
+
 
 // Delete route
 app.delete('/:id', async (req, res) => {
