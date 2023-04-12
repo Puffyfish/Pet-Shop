@@ -1,0 +1,36 @@
+<%- layout('layout/boilerplate')%>
+    <h1>Add a New Pet</h1>
+
+    <div class="">
+
+      <form class="" action="/" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" placeholder="Pet's Name">
+        <br>
+        <label for="breed">Breed:</label>
+        <input type="text" name="breed" id="breed">
+        <br>
+        <label for="price">Price:</label>
+        <input type="number" name="price" id="price">
+        <br>
+        <label for="age">Age:</label>
+        <input type="number" name="age" id="age">
+        <br>
+        <label for="category">Select Category</label>
+        <select name="category" id="category">
+          <option value="cat">Cat</option>
+          <option value="dog">Dog</option>
+          <option value="fish">Fish</option>
+          <option value="bird">Bird</option>
+        </select>
+        <br>
+        <button>Submit</button>
+      </form>
+
+
+    </div>
+
+    <a href="/">Home Page</a>
+
+  </body>
+</html>

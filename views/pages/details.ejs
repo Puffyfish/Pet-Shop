@@ -1,0 +1,37 @@
+<%- layout('layout/boilerplate')%>
+<section>
+  <div class="row gx-5">
+    <div class="col">
+      <div>
+        <img class="img-fluid"
+        src="https://images.unsplash.com/photo-1597662942557-4087865bf476?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=873&q=80" alt="">
+      </div>
+    </div>
+
+      <!-- buttons -->
+    <div class="col">
+      <h1><%= pets.name %></h1>
+      <ul>
+        <li>Breed: <%=pets.breed%></li>
+        <li>Age: <%= pets.age %></li>
+        <li>Price: <%= pets.price %></li>
+        <li>Category: <%= pets.category %></li>
+      </ul>
+
+      <div class="d-flex justify-content-between">
+          <a class="btn link-button" href="/<%=pets._id%>/edit">
+            Update
+          </a>
+        
+        <form class="" action="/<%=pets._id%>?_method=DELETE" method="post">
+          <button class="btn">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <a href="/">Back to Home Page</a>
+  </div> 
+
+</section>

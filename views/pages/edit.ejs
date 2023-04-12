@@ -1,0 +1,32 @@
+<%- layout('layout/boilerplate')%>
+    <h1>Update Pet Information</h1>
+
+    <div class="">
+
+      <form class="" action="/<%=pets._id%>?_method=PUT" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" value="<%=pets.name%>" placeholder="Pet's Name">
+        <br>
+        <label for="breed">Breed:</label>
+        <input type="text" name="breed" id="breed" value="<%=pets.breed%>">
+        <br>
+        <label for="price">Price:</label>
+        <input type="number" name="price" id="price" value="<%=pets.price%>">
+        <br>
+        <label for="age">Age:</label>
+        <input type="number" name="age" id="age" value="<%=pets.age%>">
+        <br>
+        <label for="category">Select Category</label>
+        <select name="category" id="category" value="<%=pets.category%>">
+          <% for(let category of categories){ %>
+            <option value="<%=category%>" <%=pets.category === category ? 'selected': ''%>><%=category%></option>
+          <% } %>
+        </select>
+        <br>
+        <button>Submit</button>
+      </form>
+
+
+    </div>
+
+    <a href="/">Home Page</a>
