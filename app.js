@@ -43,13 +43,25 @@ app.get('/new', (req, res) => {
 app.get('/dogs', async (req, res) => {
   const animals = await Pet.find({ category: 'Dog' });
   console.log(animals);
-  res.render('pages/animals', {animals});
+  res.render('pages/gallery', {animals});
 })
 
 app.get('/cats', async (req, res) => {
   const animals = await Pet.find({ category: 'Cat' });
   console.log(animals);
-  res.render('pages/animals', {animals});
+  res.render('pages/gallery', {animals});
+})
+
+app.get('/fishes', async (req, res) => {
+  const animals = await Pet.find({ category: 'Fish' });
+  console.log(animals);
+  res.render('pages/gallery', {animals});
+})
+
+app.get('/birds', async (req, res) => {
+  const animals = await Pet.find({ category: 'Bird' });
+  console.log(animals);
+  res.render('pages/gallery', {animals});
 })
 
 // show route for specific id

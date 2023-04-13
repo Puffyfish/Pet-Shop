@@ -1,0 +1,23 @@
+<%- layout('layout/boilerplate')%>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 p-5 g-4">
+
+    <% for (let animal of animals) {%>
+      <div class="col">
+    <div class="col card" style="width: 18rem;">
+      <img src="<%=animal.image%>" class="card-img-top" alt="...">
+      <div class="card-body">
+        <a href="/<%=animal._id%>">
+          <h5 class="card-title"><%= animal.name %></h5>
+        </a>
+        <ul>
+          <li>Breed: <%=animal.breed%></li>
+          <li>Age: <%= animal.age %></li>
+          <li>Price: $<%= animal.price %></li>
+        </ul>
+      <a href="#" class="btn custom-button">Adopt</a>
+      </div>
+    </div>
+  </div>
+    <% } %>
+
+</div>
