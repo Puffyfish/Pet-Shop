@@ -8,16 +8,16 @@
 
 :root {
   /* custom colors */
-  --primary-color: #6F6674; /* light purple */
-  --secondary-color: #564b5b; /* dark purple */
-  /* --secondary-color-m: rgba(29, 92, 102, 0.5); */
-  /* --tertiary-color: #00B8B2; */
-  /* --body-color: #f7ede2; */
-  /* --font-color: #1C1D35; */
+  --purple: #cdb4db;
+  --pink: #EED2E7;
+  --primary-color: #6F6674; /* light purple for buttons*/
+  /* --font-color: #564b5b; dark purple */
+  --secondary-color: #C3ABD0;
+  --highlighted: #EA1C2C;
 }
 
 body {
-  background: #f5d9d5;
+  background-color: var(--pink);
   color: #2e2831;
   font-family: "Nunito", sans-sans-serif;
   overflow-x: hidden;
@@ -25,7 +25,7 @@ body {
 
 /* -------------------- NAVBAR ------------------- */
 #mainNavbar {
-  background-color: #d9d5f5;
+  background-color: var(--purple);
   font-size: 1rem;
   font-weight: 200;
 }
@@ -38,28 +38,21 @@ body {
   color: #EA1C2C;
 }
 
-#navBtn {
-  border: 1px solid #564b5b;
-  color: #564b5b
-}
-
 /* -------------------- BODY/MAIN SECTION ------------------- */
-button {
-  background-color: var(--secondary-color)!important;
+.custom-button {
+  background-image: linear-gradient(#B9A2C5, #AE99BA);
+  border-radius: 5px;
+  border-width: 0;
+  /* padding: 0 1rem; */
+  padding: 0.35rem 1rem;
+  /* text-shadow: 0px 1px 0px rgba(0, 0, 0,0.3); */
+  box-shadow: inset 0px -2px 2px rgba(0,0,0,0.2), 
+    inset 0 1px 2px rgba(255,255,255,0.3);
   color: white!important;
 }
 
-button:hover {
-  background-color: var(--primary-color)!important;
-}
-
-.link-button {
-  background-color: var(--secondary-color);
-  color: white!important;
-}
-
-.link-button:hover {
-  background-color: var(--primary-color);
+.custom-button:hover {
+  background-image: linear-gradient(#AE99BA, #B9A2C5);
 }
 
 /* section in the body styles */
@@ -81,9 +74,9 @@ button:hover {
   font-size: 2rem;
 }
 
-/* Footer */
+/* -------------------- FOOTER SECTION ------------------- */
 footer {
-  background-color: #cdb4db;
+  background-color: var(--purple);
 }
 
 footer div {
@@ -95,7 +88,8 @@ footer div {
 }
 
 a {
-  color: #2e2831;
+  text-decoration: none;
+  color: var(--highlighted);
 }
 
 a:hover {
