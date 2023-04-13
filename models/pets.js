@@ -4,9 +4,10 @@ const {Schema} = mongoose;
 const petSchema = new Schema(
   {
     name: {type: String, required: true},
+    image: {type: String},
     breed: {type: String, required: true},
-    price: {type: Number, required: true},
     age: {type: Number, min: 0, max: 10},
+    price: {type: Number, required: true},
     category: {
       type: String,
       lowercase: true,
