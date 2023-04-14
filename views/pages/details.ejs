@@ -1,14 +1,15 @@
 <%- layout('layout/boilerplate')%>
-<section class="container-fluid p-5">
-  <div class="row gx-5 px-5 mb-3">
-    <div class="col">
+<section class="container-fluid">
+  <div class="row p-5">
+    <div class="row col-8 offset-2 gx-3 mb-3">
+      <div class="col">
         <img class="img-fluid"
-        src="https://images.unsplash.com/photo-1597662942557-4087865bf476"
+        src="<%= pet.image %>"
         alt="<%= pet.breed %>">
-    </div>
+      </div>
 
       <!-- buttons -->
-    <div class="col d-flex flex-column justify-content-between">
+      <div class="col d-flex flex-column justify-content-between white-background p-3">
       <h1><%= pet.name %></h1>
       <ul>
         <li>Breed: <%=pet.breed%></li>
@@ -18,13 +19,14 @@
       </ul>
 
       <div class="d-flex justify-content-between">
-          <a class="btn custom-button" href="/<%=pet._id%>/edit">
+          <a class="btn main-button" href="/<%=pet._id%>/edit">
             Update
           </a>
         
         <form class="" action="/<%=pet._id%>?_method=DELETE" method="post">
-          <button class="btn custom-button">Delete</button>
+          <button class="btn main-button">Delete</button>
         </form>
+      </div>
       </div>
     </div>
   </div>

@@ -1,32 +1,48 @@
 <%- layout('layout/boilerplate')%>
+<section class="row py-3">
+  <div class="col-6 offset-3 white-background form-container px-5 py-3">
     <h1>Update Pet Information</h1>
 
-    <div class="">
+      <form class="mb-3 validated-form" action="/<%=pet._id%>?_method=PUT" method="POST">
+        <div class="mb-3">
+          <label class="form-label" for="name">Name:</label>
+          <input class="form-control" type="text" name="name" id="name"
+            value="<%=pet.name%>" placeholder="Pet's Name" required>
+        </div>
 
-      <form class="" action="/<%=pets._id%>?_method=PUT" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" value="<%=pets.name%>" placeholder="Pet's Name">
-        <br>
-        <label for="breed">Breed:</label>
-        <input type="text" name="breed" id="breed" value="<%=pets.breed%>">
-        <br>
-        <label for="price">Price:</label>
-        <input type="number" name="price" id="price" value="<%=pets.price%>">
-        <br>
-        <label for="age">Age:</label>
-        <input type="number" name="age" id="age" value="<%=pets.age%>">
-        <br>
-        <label for="category">Select Category</label>
-        <select name="category" id="category" value="<%=pets.category%>">
-          <% for(let category of categories){ %>
-            <option value="<%=category%>" <%=pets.category === category ? 'selected': ''%>><%=category%></option>
-          <% } %>
-        </select>
-        <br>
-        <button>Submit</button>
+        <div class="mb-3">
+          <label class="form-label" for="breed">Breed:</label>
+          <input class="form-control" type="text" name="breed" id="breed" value="<%=pet.breed%>" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="price">Price:</label>
+          <input class="form-control" type="number" name="price" id="price" value="<%=pet.price%>" required>
+        </div>
+        
+        <div class="mb-3">
+          <label class="form-label" for="age">Age:</label>
+          <input class="form-control" type="number" name="age" id="age" value="<%=pet.age%>" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="category">Select Category</label>
+          <select class="form-select" name="category" id="category" value="<%=pet.category%>" required>
+            <% for(let category of categories){ %>
+            <option value="<%=category%>" <%=pet.category === category ? 'selected': ''%>><%=category%></option>
+            <% } %>
+          </select>
+        </div>
+
+        <div class="text-end">
+          <button class="btn main-button" type="submit">Submit</button>
+        </div>
+
       </form>
 
+      <div class="text-center">
+        <a href="/">Cancel</a>
+      </div>
 
-    </div>
-
-    <a href="/">Home Page</a>
+  </div>
+</section>

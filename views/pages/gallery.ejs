@@ -1,5 +1,5 @@
 <%- layout('layout/boilerplate')%>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 p-5 g-4">
+<section class="row row-cols-1 row-cols-sm-2 row-cols-md-4 px-5 py-4 g-4">
 
     <% for (let animal of animals) {%>
       <div class="col">
@@ -14,10 +14,12 @@
           <li>Age: <%= animal.age %></li>
           <li>Price: $<%= animal.price %></li>
         </ul>
-      <a href="#" class="btn custom-button">Adopt</a>
+        <div class="text-end">
+          <a href="#" class="btn main-button">Adopt</a>
+        </div>
       </div>
     </div>
   </div>
     <% } %>
 
-</div>
+</section>

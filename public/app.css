@@ -7,38 +7,47 @@
 }
 
 :root {
-  /* custom colors */
-  --purple: #cdb4db;
-  --pink: #EED2E7;
-  --primary-color: #6F6674; /* light purple for buttons*/
-  /* --font-color: #564b5b; dark purple */
-  --secondary-color: #C3ABD0;
+  /* background colors */
+  --light-purple: #cdb4db;
+  --background-pink: #EED2E7;
+
+  /* button colors */
+  --purple-button: #6F6674; /* light purple for buttons*/
+  /* light blue #bde0fe */
+  /* dark blue #a2d2ff */
+
+  /* link colors */
   --highlighted: #EA1C2C;
+
+  /* font color */
+  --font-color: #2e2831; /*dark purple */
+
 }
 
 body {
-  background-color: var(--pink);
-  color: #2e2831;
+  background-color: var(--background-pink);
+  color: var(--font-color);
   font-family: "Nunito", sans-sans-serif;
   overflow-x: hidden;
 }
 
 /* -------------------- NAVBAR ------------------- */
 #mainNavbar {
-  background-color: var(--purple);
+  background-color: var(--light-purple);
   font-size: 1rem;
   font-weight: 200;
 }
 
 #mainNavbar .nav-link {
-  color: #2e2831;
+  color: var(--font-color);
 }
 
 #mainNavbar .nav-link:hover {
-  color: #EA1C2C;
+  color: var(--highlighted);
 }
 
 /* -------------------- BODY/MAIN SECTION ------------------- */
+
 .custom-button {
   background-image: linear-gradient(#B9A2C5, #AE99BA);
   border-radius: 5px;
@@ -55,6 +64,23 @@ body {
   background-image: linear-gradient(#AE99BA, #B9A2C5);
 }
 
+.main-button {
+  background-image: linear-gradient(#a2d2ff, #bde0fe);
+  border-radius: 5px;
+  border-width: 0;
+  padding: 0.35rem 1rem;
+  box-shadow: inset 0px -2px 2px rgba(0,0,0,0.2), 
+    inset 0 1px 2px rgba(255,255,255,0.3);
+}
+
+.white-background {
+  background-color: floralwhite;
+}
+
+.form-container {
+  border-radius: 1rem;
+}
+
 /* section in the body styles */
 
 #textHeader h1 {
@@ -63,7 +89,7 @@ body {
 }
 
 #textHeader span {
-  color: #EA1C2C;
+  color: var(--highlighted);
 }
 
 .textItems {
@@ -76,7 +102,7 @@ body {
 
 /* -------------------- FOOTER SECTION ------------------- */
 footer {
-  background-color: var(--purple);
+  background-color: var(--light-purple);
 }
 
 footer div {
