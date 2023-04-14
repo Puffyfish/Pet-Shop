@@ -4,25 +4,25 @@
     <div class="col">
         <img class="img-fluid"
         src="https://images.unsplash.com/photo-1597662942557-4087865bf476"
-        alt="<%=pets.breed%>">
+        alt="<%= pet.breed %>">
     </div>
 
       <!-- buttons -->
     <div class="col d-flex flex-column justify-content-between">
-      <h1><%= pets.name %></h1>
+      <h1><%= pet.name %></h1>
       <ul>
-        <li>Breed: <%=pets.breed%></li>
-        <li>Age: <%= pets.age %></li>
-        <li>Price: <%= pets.price %></li>
-        <li>Category: <%= pets.category %></li>
+        <li>Breed: <%=pet.breed%></li>
+        <li>Age: <%= pet.age %></li>
+        <li>Price: <%= pet.price %></li>
+        <li>Category: <%= pet.category %></li>
       </ul>
 
       <div class="d-flex justify-content-between">
-          <a class="btn custom-button" href="/<%=pets._id%>/edit">
+          <a class="btn custom-button" href="/<%=pet._id%>/edit">
             Update
           </a>
         
-        <form class="" action="/<%=pets._id%>?_method=DELETE" method="post">
+        <form class="" action="/<%=pet._id%>?_method=DELETE" method="post">
           <button class="btn custom-button">Delete</button>
         </form>
       </div>

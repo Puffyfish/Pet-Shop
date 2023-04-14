@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 
+const AppError = require('./utils/AppError');
+
 mongoose.set('strictQuery', true);
 mongoose.connect('mongodb://127.0.0.1/petShop')
   .then(() => {
@@ -28,11 +30,15 @@ app.use(methodOverride('_method'))
 
 // DEFINE ROUTES
 
-// Show route
+// Home route
 app.get('/', async (req, res) => {
-  const pets = await Pet.find({})
-  console.log(pets)
-  res.render('pages/index', { pets })
+  try {
+    const pets = await Pet.find({});
+    res.render('pages/index', { pets });
+  } catch(e) {
+    next(e);
+  }
+  
 })
 
 // New route (a)
@@ -41,66 +47,113 @@ app.get('/new', (req, res) => {
 })
 
 app.get('/dogs', async (req, res) => {
-  const animals = await Pet.find({ category: 'Dog' });
-  console.log(animals);
-  res.render('pages/gallery', {animals});
+  try {
+    const animals = await Pet.find({ category: 'Dog' });
+    console.log(animals);
+    res.render('pages/gallery', {animals});
+  } catch(e) {
+    next(e);
+  }
+  
 })
 
 app.get('/cats', async (req, res) => {
-  const animals = await Pet.find({ category: 'Cat' });
-  console.log(animals);
-  res.render('pages/gallery', {animals});
+  try {
+    const animals = await Pet.find({ category: 'Cat' });
+    console.log(animals);
+    res.render('pages/gallery', {animals});
+  } catch(e) {
+    next(e);
+  }
+  
 })
 
 app.get('/fishes', async (req, res) => {
-  const animals = await Pet.find({ category: 'Fish' });
-  console.log(animals);
-  res.render('pages/gallery', {animals});
+  try {
+    const animals = await Pet.find({ category: 'Fish' });
+    res.render('pages/gallery', {animals});
+  } catch(e) {
+    next(e);
+  }
+  
 })
 
 app.get('/birds', async (req, res) => {
-  const animals = await Pet.find({ category: 'Bird' });
-  console.log(animals);
-  res.render('pages/gallery', {animals});
+  try {const animals = await Pet.find({ category: 'Bird' });
+    res.render('pages/gallery', {animals});
+  } catch(e) {
+    next(e);
+  }
 })
 
 // show route for specific id
-app.get('/:id', async (req, res) => {
-  const { id } = req.params;
-  const pets = await Pet.findById(id)
-  res.render('pages/details', { pets } )
+app.get('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const pet = await Pet.findById(id);
+    if (!pet) {
+      return next(new AppError('Pet not found!', 404));
+    }
+    res.render('pages/details', { pet } )
+  } catch (e) {
+    next(e);
+  }
+  
 })
 
 // New route (b)
 app.post('/', async (req, res) => {
-  const newPet = new Pet(req.body)
-  await newPet.save();
-  console.log(newPet)
-  res.redirect(`/${newPet._id}`);
+  try {
+    const newPet = new Pet(req.body)
+    await newPet.save();
+    console.log(newPet)
+    res.redirect(`/${newPet._id}`);
+  } catch(e) {
+    next(e);
+  }
 })
 
 // Edit route
 app.get('/:id/edit', async (req, res) => {
-  const { id } = req.params;
-  const pets = await Pet.findById(id)
-  res.render('pages/edit', { pets, categories } )
+  try {
+    const { id } = req.params;
+    const pets = await Pet.findById(id)
+    res.render('pages/edit', { pets, categories } )
+  } catch(e) {
+    next(e);
+  }
 })
 
 app.put('/:id', async (req, res) => {
-  const { id } = req.params;
-  const editedPet = await Pet.findByIdAndUpdate(id, req.body, {runValidators: true, new: true})
-  res.redirect(`/${editedPet._id}`);
+  try {
+    const { id } = req.params;
+    const editedPet = await Pet.findByIdAndUpdate(id, req.body, {runValidators: true, new: true})
+    res.redirect(`/${editedPet._id}`);
+  } catch(e) {
+    next(e);
+  }
 })
 
 
 // Delete route
 app.delete('/:id', async (req, res) => {
-  const { id } = req.params;
-  const deletedPet = await Pet.findByIdAndDelete(id);
-  console.log(`${deletedPet.name} has been deleted`);
-  res.redirect('/');
+  try {
+    const { id } = req.params;
+    const deletedPet = await Pet.findByIdAndDelete(id);
+    console.log(`${deletedPet.name} has been deleted`);
+    res.redirect('/');
+  } catch(e) {
+    next(e);
+  }
 })
 
+
+app.use((err, req, res, next) => {
+  const { status = 500, message = 'Something went wrong!' } = err;
+  // err here is from the AppError.js class we created
+  // 500, and the declared message is a default if there is no specified error status and message
+  res.status(status).send(message);
+})
 
 
 app.listen(3050, (req, res) => {
