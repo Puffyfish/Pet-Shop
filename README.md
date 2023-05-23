@@ -1,14 +1,6 @@
 # Pet-Shop
-Welcome to the Petshop website! This website was created using the best of modern web technologies such as Vanilla JS, Bootstrap, Express, MongoDB, and NodeJS.
-Here are just some of the benefits and features that you can enjoy when using this tech stack: 
-
-1. Vanilla JS: Allows for easy front-end development with no complex dependencies, small code footprint, and a robust library of events and methods.
-
-2. Bootstrap: Quickly design and develop responsive layouts, stock components, and optimized cross-browser compatibility.
-
-3. Express: Use Express to quickly build dynamic server-side web applications with minimal configuration.
-
-4. MongoDB: Enjoy rapid, reliable, and scalable data
+Welcome to the Adop-a-Pet website!
+This website was created using the best of modern web technologies such as Vanilla JS, Bootstrap, Express, MongoDB, and NodeJS.
 
 ## Getting Started
 1. To get started with the project, you can clone this repository to your local machine.
@@ -16,3 +8,11 @@ Here are just some of the benefits and features that you can enjoy when using th
 3. Make sure you have nodejs and mongodb installed. Mongo database should be running in the background. You can do this by running 'mongod' in the command line.
 4. If mongo database is ready then you can seeds the dummy data. Run 'node seeds.js'
 5. Run 'nodemon app.js; - to run app to a browser 
+
+![puffyfish-petshop](https://github.com/Puffyfish/Pet-Shop/assets/93864592/fa7c6926-6905-4236-becf-b112f3ce4315)
+
+## Work in progress
+* Add proper text in home page
+* Fix and enhance overall styling
+* Add a fake questionnaire for Adopting a pet
+* Deploy app
