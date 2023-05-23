@@ -3,11 +3,17 @@
   <div class="col-6 offset-3 white-background form-container px-5 py-3">
     <h1>Update Pet Information</h1>
 
-      <form class="mb-3 validated-form" action="/<%=pet._id%>?_method=PUT" method="POST">
+      <form class="mb-3 validated-form" novalidate action="/<%=pet._id%>?_method=PUT" method="POST">
         <div class="mb-3">
           <label class="form-label" for="name">Name:</label>
           <input class="form-control" type="text" name="name" id="name"
             value="<%=pet.name%>" placeholder="Pet's Name" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="image">Image:</label>
+          <input class="form-control" type="url" name="image" 
+          id="image" value="<%=pet.image%>">
         </div>
 
         <div class="mb-3">

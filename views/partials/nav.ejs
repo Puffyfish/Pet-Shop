@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light sticky-top" id="mainNavbar">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">Adorable Tinies</a>
+    <a class="navbar-brand" href="/pets">Adorable Tinies</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,37 +8,34 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item px-2">
-          <a href="/dogs" class="nav-link">DOGS</a>
+          <a href="/pets/dogs" class="nav-link">DOGS</a>
         </li>
         <li class="nav-item px-2">
-          <a href="/cats" class="nav-link">CATS</a>
+          <a href="/pets/cats" class="nav-link">CATS</a>
         </li>
         <!-- <li class="nav-item px-2">
           <a href="#" class="nav-link">SMALL MAMMALS</a>
         </li> -->
         <li class="nav-item px-2">
-          <a href="/birds" class="nav-link">BIRDS</a>
+          <a href="/pets/birds" class="nav-link">BIRDS</a>
         </li>
         <li class="nav-item px-2">
-          <a href="/fishes" class="nav-link">FISHES</a>
+          <a href="/pets/fishes" class="nav-link">FISHES</a>
         </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Basic Needs
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Feeding Needs</a></li>
-              <li><a class="dropdown-item" href="#">Health & Medicine</a></li>
-              <li><a class="dropdown-item" href="#">Grooming & Hygiene</a></li>
-              <li><a class="dropdown-item" href="#">Toys % Accessories</a></li>
-              <li><a class="dropdown-item" href="#">Toilets & Beddings</a></li>
-              <li><a class="dropdown-item" href="#">Travel/Transportation</a></li>
-            </ul>
+        <li>
+          <a class="nav-link" href="/faq">FAQ</a>
         </li>
       </ul>
     </div>
 
 <!-- Search -->
+  <div class="d-flex">
+    <a class="nav-link" href="/logout">Logout</a>
+    <a class="nav-link" href="/register">Register</a>
+    <a class="nav-link" href="/login">
+      <i class="fa-solid fa-circle-user fa-xl"></i>
+    </a>
+  </div>
     <form class="d-flex">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
       <button class="custom-button" type="submit">Search</button>

@@ -47,6 +47,19 @@ body {
 }
 
 /* -------------------- BODY/MAIN SECTION ------------------- */
+.alert-overlay {
+  position: relative;
+}
+
+.alert-overlay > div {
+  position: absolute;
+  left: 40%;
+  z-index: 4;
+}
+
+ul {
+  list-style: none;
+}
 
 .custom-button {
   background-image: linear-gradient(#B9A2C5, #AE99BA);
@@ -74,7 +87,7 @@ body {
 }
 
 .white-background {
-  background-color: floralwhite;
+  background-color: ghostwhite;
 }
 
 .form-container {
@@ -111,6 +124,7 @@ footer div {
 
 #footerIcons i {
   font-size: 1.5rem;
+  color: var(--font-color);
 }
 
 a {

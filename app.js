@@ -4,21 +4,25 @@ const path = require('path');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
+const morgan = require('morgan');
+const session = require('express-session');
+const flash = require('connect-flash');
 
 const AppError = require('./utils/AppError');
 
+const petRoutes = require('./routes/pets')
+const userRoutes = require('./routes/user')
+
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user')
+
+
 mongoose.set('strictQuery', true);
 mongoose.connect('mongodb://127.0.0.1/petShop')
-  .then(() => {
-    console.log("Mongo connection open!!!");
-  })
-  .catch(() => {
-    console.log("Oh no Mongo Connection error!!");
-    console.log(err);
-  })
-
-const Pet = require('./models/pets')
-const categories = ['dog', 'cat', 'fish', 'bird']
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "Connection error:"));
+db.once("open", () => console.log("Database connected!!!"));
 
 app.engine('ejs', ejsMate);
 app.set('views', path.join(__dirname, 'views'))
@@ -28,131 +32,53 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'))
 
-// DEFINE ROUTES
+app.use(morgan('tiny')); // for logging in the terminal, useful for debugging
 
-// Home route
-app.get('/', async (req, res) => {
-  try {
-    const pets = await Pet.find({});
-    res.render('pages/index', { pets });
-  } catch(e) {
-    next(e);
+const sessionConfig = {
+  secret: 'thisisverysecretive',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true, // VERY IMPORTANT, so cookie cannot be accessed in client-side
+    expires: Date.now() + 1000 * 60 * 60 *24 * 7,
+    maxAge: 1000 * 60 * 60 *24 * 7
   }
-  
+}
+app.use(session(sessionConfig));
+app.use(flash());
+
+// PASSPORT AUTHENTICATION
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());// to store a user in session
+passport.deserializeUser(User.deserializeUser());
+
+// middleware for FLASH error and success message
+app.use( (req, res, next) => {
+  res.locals.currentUser = req.user; // this is provided by passport
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
 })
 
-// New route (a)
-app.get('/new', (req, res) => {
-  res.render('pages/new')
+// ------------------ Routes ------------------- 
+
+app.use('', userRoutes);
+app.use('/pets', petRoutes);
+
+app.all('*', (err,req,res,next) => {
+  next(new AppError('Page not found!', 404));
 })
-
-app.get('/dogs', async (req, res) => {
-  try {
-    const animals = await Pet.find({ category: 'Dog' });
-    console.log(animals);
-    res.render('pages/gallery', {animals});
-  } catch(e) {
-    next(e);
-  }
-  
-})
-
-app.get('/cats', async (req, res) => {
-  try {
-    const animals = await Pet.find({ category: 'Cat' });
-    console.log(animals);
-    res.render('pages/gallery', {animals});
-  } catch(e) {
-    next(e);
-  }
-  
-})
-
-app.get('/fishes', async (req, res) => {
-  try {
-    const animals = await Pet.find({ category: 'Fish' });
-    res.render('pages/gallery', {animals});
-  } catch(e) {
-    next(e);
-  }
-  
-})
-
-app.get('/birds', async (req, res) => {
-  try {const animals = await Pet.find({ category: 'Bird' });
-    res.render('pages/gallery', {animals});
-  } catch(e) {
-    next(e);
-  }
-})
-
-// show route for specific id
-app.get('/:id', async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const pet = await Pet.findById(id);
-    if (!pet) {
-      return next(new AppError('Pet not found!', 404));
-    }
-    res.render('pages/details', { pet } )
-  } catch (e) {
-    next(e);
-  }
-  
-})
-
-// New route (b)
-app.post('/', async (req, res) => {
-  try {
-    const newPet = new Pet(req.body)
-    await newPet.save();
-    console.log(newPet)
-    res.redirect(`/${newPet._id}`);
-  } catch(e) {
-    next(e);
-  }
-})
-
-// Edit route
-app.get('/:id/edit', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const pets = await Pet.findById(id)
-    res.render('pages/edit', { pets, categories } )
-  } catch(e) {
-    next(e);
-  }
-})
-
-app.put('/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const editedPet = await Pet.findByIdAndUpdate(id, req.body, {runValidators: true, new: true})
-    res.redirect(`/${editedPet._id}`);
-  } catch(e) {
-    next(e);
-  }
-})
-
-
-// Delete route
-app.delete('/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const deletedPet = await Pet.findByIdAndDelete(id);
-    console.log(`${deletedPet.name} has been deleted`);
-    res.redirect('/');
-  } catch(e) {
-    next(e);
-  }
-})
-
 
 app.use((err, req, res, next) => {
-  const { status = 500, message = 'Something went wrong!' } = err;
+  const { status = 500} = err;
   // err here is from the AppError.js class we created
-  // 500, and the declared message is a default if there is no specified error status and message
-  res.status(status).send(message);
+  if (!err.message) { // if there's no error message
+    err.message = 'Something went wrong!'; // then, set this default message
+  }
+  res.status(status).render('not-found', {err})
 })
 
 
